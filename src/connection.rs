@@ -22,6 +22,8 @@ use message::Message;
 use protocol::{CloseCode, OpCode};
 use result::{Error, Kind, Result};
 use stream::{Stream, TryReadBuf, TryWriteBuf};
+use std::thread::sleep;
+use std::time::Duration;
 
 use self::Endpoint::*;
 use self::State::*;
@@ -594,6 +596,7 @@ where
                     return Ok(());
                 }
                 Client(_) => {
+                    sleep(Duration::from_millis(100));
                     if self.socket.try_read_buf(res.get_mut())?.is_some() {
                         // TODO: see if this can be optimized with drain
                         let end = {
