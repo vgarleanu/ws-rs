@@ -596,7 +596,7 @@ where
                     return Ok(());
                 }
                 Client(_) => {
-                    sleep(Duration::from_millis(100));
+                    sleep(Duration::from_millis(300));
                     if self.socket.try_read_buf(res.get_mut())?.is_some() {
                         // TODO: see if this can be optimized with drain
                         let end = {
